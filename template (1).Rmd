@@ -1,21 +1,55 @@
 ---
 title: "Simple document"
-output: html_document
+output: github_document
 ---
 
 I'm an R Markdown document! 
 
 # Section 1
 
-Here's a **code chunk** that samples from 
-a _normal distribution_:
-
-```{r}
-samp = rnorm(100)
-length(samp)
+```{r, echo = FLASE, message = FALSE}
+library(tidyverse)
 ```
 
-# Section 2
+# import some data
 
-I can take the mean of the sample, too!
-The mean is `r mean(samp)`.
+I want to import 'FAS_ litters.cvs'.
+
+```{r}
+litters_df = read_csv("data/FAS_litters.csv")
+
+#absolute path (only work in the path)
+#read_csv("/Users/freya/Desktop/Data Science I P8105/In class code/data_wrangling_i/data/FAS_litters.csv")
+```
+
+Import the dataset. Now I want better names (changing the name)
+
+```{r}
+names(litters_df)
+
+litters_df = janitor::clean_names(litters_df)
+```
+
+Look at the dataset
+
+```{r}
+litters_df
+
+head(litters_df)
+tail(litters_df)
+```
+
+One I use 
+
+```{r, eval = FALSE}
+view(litters_df)
+```
+
+Here's 'skimr':
+
+```{r}
+skimr::skim(litters_df)
+```
+
+## Arguments in 'read_csv'
+
